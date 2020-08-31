@@ -12,8 +12,10 @@ class PassengerDataSet(Dataset):
         data = self.data_process(df)
         if train:
             if validation:
+                data = data[self.train_len:]
                 self.target = torch.tensor(np.array(df["Survived"][self.train_len:]), dtype = torch.float32)
             else:
+                data = data[:self.train_len]
                 self.target = torch.tensor(np.array(df["Survived"][:self.train_len]), dtype = torch.float32)
         self.data = torch.tensor(data, dtype = torch.float32)
         
