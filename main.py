@@ -18,7 +18,7 @@ loss_func = torch.nn.BCELoss()
 optimizer = torch.optim.SGD(model.parameters(), lr = 0.001)
 
 
-for epoch in range(1000):
+for epoch in range(600):
     train_loss = 0
     for features, labels in train_loader:
         output = model(features)

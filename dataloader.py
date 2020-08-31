@@ -26,14 +26,16 @@ class PassengerDataSet(Dataset):
         data = []
         age_nan = df["Age"].isnull()
         age = self.normalize(df["Age"])
+        parch = self.normalize(df["Parch"])
+        sibsp = self.normalize(df["SibSp"])
         if self.validation:
             for i in range(self.train_len, len(df)):
                 personal_info = np.zeros(8)
                 personal_info[0] = (0 if age_nan[i] else age[i])
                 personal_info[1] = (1 if age_nan[i] else 0)
                 personal_info[2] = (1 if df["Sex"].iloc[i] == "male" else 0)
-                personal_info[3] = df["Parch"].iloc[i]
-                personal_info[4] = df["SibSp"].iloc[i]
+                personal_info[3] =parch[i]
+                personal_info[4] = sibsp[i]
                 personal_info[5] = (1 if df["Pclass"].iloc[i] == 1 else 0)
                 personal_info[6] = (1 if df["Pclass"].iloc[i] == 2 else 0)
                 personal_info[7] = (1 if df["Pclass"].iloc[i] == 3 else 0)
